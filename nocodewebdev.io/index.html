@@ -1,0 +1,649 @@
+
+<style>
+body {
+  background-color: #fbfbfb;
+}
+@media (min-width: 991.98px) {
+  main {
+    padding-left: 240px;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 58px 0 0; /* Height of navbar */
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+  width: 240px;
+  z-index: 600;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+.sidebar .active {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.sidebar .text {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.list-group-item.text {
+     z-index: 2;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.list-group-item.button {
+  z-index: 2;
+ color: rgb(0, 0, 0);
+ background-color: #ffd900;
+ border-color: #ffd900;
+}
+
+.list-group-item.form {
+   z-index: 2;
+ color: rgb(0, 0, 0);
+ background-color: #E2E2E2;
+ border-color: #6F6F6F;
+
+}
+
+
+ul {
+    width: 150px;
+    padding: 0;
+    margin-left: 100px;
+    float: left;
+
+    
+}
+ul li {
+        margin-bottom: 20px;
+        list-style: none;
+      background-color: #ededed;
+      height: 40px;
+      padding: 5px;
+    }
+.jtk-connector {
+}
+.jtk-connector path {
+    stroke: #e03571;
+    stroke-width: 3;
+  }
+.jtk-endpoint {
+}
+.jtk-endpoint circle {
+    fill: #e03571;
+  }
+
+.cvtest{
+    height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+#tableofcontents{
+    align-items: center;
+    z-index:  1;
+    position: relative;
+    height: 100%;
+    width: 15%;
+    background-color: #e03571;
+}
+#page_connections{
+    position: relative;
+  left: 10%;
+}
+.col-lg-4{
+    border-color: aqua;
+    background-color: #bbb;
+}
+.dot {
+  position: relative;
+  left: -12%;
+  height: 25px;
+  width: 124%;
+  background-color: #bbb;
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.btn:hover, .dropdown:hover .btn  {
+  background-color: #0b7dda;
+}
+
+
+    </style>
+
+
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+
+        <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+        <script src="C:/Users/alexa/Desktop/nocodewebdev.io/node_modules/jsplumb/dist/js/jsplumb.min.js "></script>
+    
+      </head>
+
+    <body>
+      
+               
+        <nav
+        id="sidebarMenu"
+        class="collapse d-lg-block sidebar collapse bg-white"
+        >
+     <div class="position-sticky">
+        <center>Tools</center>
+       
+     </div>
+
+
+   </nav>
+
+   <div id="page_connections">
+    <div id="select_list_lebensbereiche">
+      <ul id="aaaasdasdasd" style="position: relative;">
+    
+      </ul>
+    </div>
+    <div id="select_list_wirkdimensionen">
+      <ul>
+    
+      </ul>
+    </div>
+  </div>
+        <script src="https://kit.fontawesome.com/238934a23b.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+
+
+</html>
+
+
+
+  
+
+  <script>
+function Randomnumber(min, max) {
+    return Math.random() * (max - min) + min;
+}
+function MakeRandomString(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
+}
+
+cat = 0
+tabelposiibleelenmets ={
+    "if statement":[type = "if",style=`
+<td><a style="position: relative;"class="list-group-item list-group-item-action py-2 ripple active text" id="Source0">Source 0</a></td>
+`,button=`
+        
+        <button
+        id="ifstatement"
+           class="list-group-item list-group-item-action py-2 ripple active text"
+           aria-current="true"
+           
+           >
+           <i class="fa-solid fa-text-slash"></i><span>If statement</span>
+        </button><br>
+     
+      `],
+      "Create variable":[type = "variable",style=`
+<td><a style="position: relative;"class="list-group-item list-group-item-action py-2 ripple active text" id="Source0">Source 0</a></td>
+`,button=`
+        
+        <button
+        id="variable"
+           class="list-group-item list-group-item-action py-2 ripple active text"
+           aria-current="true"
+           
+           >
+           <i class="fa-solid fa-text-slash"></i><span>Variable</span>
+        </button><br>
+     
+      `],
+      "Consolelog":[type = "variable",style=`
+<td><a style="position: relative;"class="list-group-item list-group-item-action py-2 ripple active text" id="Source0">Source 0</a></td>
+`,button=`
+        
+        <button
+        id="consolelog"
+           class="list-group-item list-group-item-action py-2 ripple active text"
+           aria-current="true"
+           
+           >
+           <i class="fa-solid fa-text-slash"></i><span>Print/Console.log</span>
+        </button><br>
+     
+      `],
+}
+
+
+    
+jQuery(document).ready(function() {
+
+
+
+});
+    jQuery(document).ready(function() {
+      connections = {}
+
+
+      tosee = `<center>Tools</center>
+      <div class="list-group list-group-flush mx-3 mt-2">`
+      for (var k in tabelposiibleelenmets){
+        tosee = tosee+tabelposiibleelenmets[k][2]
+      }
+      tosee = tosee+"</div>"
+      $( ".position-sticky" ).html(tosee);
+     
+      currentid = ""
+      $(document).on ("click", "#ifstatement", function () {
+    
+     
+    cat = cat + 1
+    randomnr = MakeRandomString(70);
+    console.log(randomnr)
+    var tag = document.createElement(randomnr);
+    tag.id = randomnr
+    
+    document.getElementById('aaaasdasdasd').appendChild(tag);
+    tagplus1=(randomnr+1)
+    tag.innerHTML =`
+
+    <td><a style="position: relative;width:200px;"class="list-group-item list-group-item-action py-2 ripple active text" >IF STATEMENT
+      <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
+      </a></td>
+      <div class="list-group-item list-group-item-action py-2 ripple active text" style="relative;width:200px;">
+        <label for="name"></label>
+
+<input style="width:40px;"type="text" id="name">
+  <select name="operator" id="cars">
+    <option value="=">==</option>
+    <option value="<"><</option>
+    <option value=">">></option>
+    <option value="!=">!=</option>
+    <option value="&&=">&&</option>
+  </select>
+  <label for="name"></label>
+
+<input style="width:40px;"type="text" id="name">
+  </div>
+
+  
+  
+
+
+           `
+           $( "#"+randomnr ).draggable();
+  
+       
+          jsPlumb.importDefaults({
+          ConnectionsDetachable: true,
+          ReattachConnections: true,
+          maxConnections: 2,
+          Container: "page_connections"
+        });
+
+
+
+
+
+
+
+
+
+        jQuery("#"+randomnr+1).click(function() {
+          // remove existing endpoint if any
+          //jsPlumb.deleteEndpoint(questionEndpoints[1]);
+          //create a new one:
+          console.log(this.id)
+          if(questionEndpoints[0] == undefined){
+            questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
+            currentid = this.id
+            
+          }else{
+            if (falseordeleteEndPoint(this.id)==false &&currentid!=this.id){
+              tablecontents[this.id][1] = true
+              questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
+              tablecontents[this.id][2] = questionEndpoints[1],this.id
+              connectEndpoints();
+              }else{
+                  jsPlumb.deleteEndpoint(tablecontents[this.id][2]);
+                  connections = 
+                  tablecontents[this.id] = undefined
+              }
+            }
+        });
+      
+        var connectEndpoints = function() {
+          jsPlumb.connect({
+            source: questionEndpoints[0],
+            target: questionEndpoints[1]
+          });
+          console.log(questionEndpoints)
+          setTimeout(questionEndpoints = [], 20);
+          jsPlumb.repaintEverything();
+        }
+        
+      });
+
+
+
+      $(document).on ("click", "#variable", function () {
+    
+     
+    cat = cat + 1
+    randomnr = MakeRandomString(70);
+    console.log(randomnr)
+    var tag = document.createElement(randomnr);
+    tag.id = randomnr
+    
+    document.getElementById('aaaasdasdasd').appendChild(tag);
+    tagplus1=(randomnr+1)
+    tag.innerHTML =`
+
+    <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >SET/UPDATE VARIABLE
+      <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
+      </a></td>
+      <div class="list-group-item list-group-item-action py-2 ripple active text" style="relative;width:200px;">
+        <label for="name"></label>
+        <label style="font-size:10px;" for="name">Variable name</label></br>
+       
+<input style="width:40px;"type="text" id="name">
+&nbsp;
+  <label for="name">=</label>
+  &nbsp; 
+
+<input style="width:40px;"type="text" id="name">
+<label style="font-size:10px;" for="name">Value</label></br>
+  </div>
+
+  
+  
+
+
+           `
+           $( "#"+randomnr ).draggable();
+  
+       
+          jsPlumb.importDefaults({
+          ConnectionsDetachable: true,
+          ReattachConnections: true,
+          maxConnections: 2,
+          Container: "page_connections"
+        });
+
+
+
+
+
+
+
+
+
+        jQuery("#"+randomnr+1).click(function() {
+          // remove existing endpoint if any
+          //jsPlumb.deleteEndpoint(questionEndpoints[1]);
+          //create a new one:
+          console.log(this.id)
+          if(questionEndpoints[0] == undefined){
+            questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
+            currentid = this.id
+            
+          }else{
+            if (falseordeleteEndPoint(this.id)==false &&currentid!=this.id){
+              tablecontents[this.id][1] = true
+              questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
+              tablecontents[this.id][2] = questionEndpoints[1],this.id
+              connectEndpoints();
+              }else{
+                  jsPlumb.deleteEndpoint(tablecontents[this.id][2]);
+                  tablecontents[this.id] = undefined
+              }
+            }
+        });
+      
+        var connectEndpoints = function() {
+          jsPlumb.connect({
+            source: questionEndpoints[0],
+            target: questionEndpoints[1]
+          });
+          console.log(questionEndpoints)
+          setTimeout(questionEndpoints = [], 20);
+          jsPlumb.repaintEverything();
+        }
+        
+      });
+
+
+
+
+      $(document).on ("click", "#consolelog", function () {
+    
+     
+    cat = cat + 1
+    randomnr = MakeRandomString(70);
+    console.log(randomnr)
+    var tag = document.createElement(randomnr);
+    tag.id = randomnr
+    
+    document.getElementById('aaaasdasdasd').appendChild(tag);
+    tagplus1=(randomnr+1)
+    tag.innerHTML =`
+
+    <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >Print/Console.log
+      <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
+      </a></td>
+      <div class="list-group-item list-group-item-action py-2 ripple active text" style="relative;width:200px;">
+        <label for="name"></label>
+        <label style="font-size:10px;" for="name">Enter variable name / string("smth")/ other</label></br>
+       
+<input style="width:100%;"type="text" id="name">
+
+  </div>
+
+  
+  
+
+
+           `
+           $( "#"+randomnr ).draggable();
+  
+       
+          jsPlumb.importDefaults({
+          ConnectionsDetachable: true,
+          ReattachConnections: true,
+          maxConnections: 2,
+          Container: "page_connections"
+        });
+
+
+
+
+
+
+
+
+
+        jQuery("#"+randomnr+1).click(function() {
+          // remove existing endpoint if any
+          //jsPlumb.deleteEndpoint(questionEndpoints[1]);
+          //create a new one:
+          console.log(this.id)
+          if(questionEndpoints[0] == undefined){
+            questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
+            currentid = this.id
+            
+          }else{
+            if (falseordeleteEndPoint(this.id)==false &&currentid!=this.id){
+              tablecontents[this.id][1] = true
+              questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
+              tablecontents[this.id][2] = questionEndpoints[1],this.id
+              connectEndpoints();
+              }else{
+                  jsPlumb.deleteEndpoint(tablecontents[this.id][2]);
+                  tablecontents[this.id] = undefined
+              }
+            }
+        });
+      
+        var connectEndpoints = function() {
+          jsPlumb.connect({
+            source: questionEndpoints[0],
+            target: questionEndpoints[1]
+          });
+          console.log(questionEndpoints)
+          setTimeout(questionEndpoints = [], 20);
+          jsPlumb.repaintEverything();
+        }
+        
+      });
+
+
+
+      $('body').click(function(){
+    //Some code
+    
+    addEventListener('mousemove', (event) => {jsPlumb.repaintEverything();});
+});
+
+  
+  });
+
+        var targetOption = {
+          anchor: "LeftMiddle",
+          maxConnections: 2,
+          isSource: true,
+          isTarget: true,
+          reattach: true,
+          endpoint: "Dot",
+          connector: [ "Bezier", { curviness: 2 } ],
+          setDragAllowedWhenFull: true
+        };
+      
+        var LeftsourceOption = {
+          tolerance: "touch",
+          anchor: "LeftMiddle",
+          maxConnections: 2,
+          isSource: true,
+          isTarget: false,
+          reattach: true,
+          endpoint: "Dot",
+          connector: [ "Flowchart", { curviness: 5 } ],
+          setDragAllowedWhenFull: true
+        };
+        var RightsourceOption = {
+          tolerance: "touch",
+          anchor: "RightMiddle",
+          maxConnections: 2,
+          isSource: true,
+          isTarget: true,
+          reattach: true,
+          endpoint: "Dot",
+          connector: [ "Flowchart", { curviness: 5 } ],
+          setDragAllowedWhenFull: true
+        };
+      
+        
+      
+        var questionEndpoints = []; // 'source' and 'target' endpoints
+        var tablecontents = []
+        // "source" click handler
+        function falseordeleteEndPoint(id){
+            console.log(tablecontents[id])
+            if (typeof tablecontents[id] !== 'undefined'){
+                if(tablecontents[id][1] != false){
+                    return true
+                    //delete end point
+                }else{
+                    return false
+                    //dont delete endpoint
+                }
+            }else{
+                tablecontents[id] = {}
+                //dont delete endpoint
+                    return false
+       
+            }
+        }
+      
+      
+        // "target" endpoint
+        
+
+
+
+
+
+
+
+
+
+
+      </script>
+      </body>
