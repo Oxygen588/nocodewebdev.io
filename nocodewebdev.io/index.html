@@ -226,7 +226,7 @@ function Randomnumber(min, max) {
     return Math.random() * (max - min) + min;
 }
 function MakeRandomString(length) {
-    var result           = '';
+    var result           = 'A';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
@@ -282,7 +282,9 @@ tabelposiibleelenmets ={
       `],
 }
 
-
+function deleteid(id){
+  document.getElementById(id).remove();
+}
     
 jQuery(document).ready(function() {
   dateconnections = {}
@@ -311,11 +313,12 @@ jQuery(document).ready(function() {
     console.log(randomnr)
     var tag = document.createElement(randomnr);
     tag.id = randomnr
-    
+    tag.style.position = 'absolute';
     document.getElementById('aaaasdasdasd').appendChild(tag);
-    tagplus1=(randomnr+1)
-    tag.innerHTML =`<div id="`+(randomnr+3)+`">
-    <div id="`+(randomnr+2)+`"style="position:relative;left:120%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
+    tagplus1=(randomnr+"1")
+    tagplus3=(randomnr+"3")
+    tag.innerHTML =`<div id="`+tagplus3+`">
+    <div onclick="deleteid('`+(randomnr+"3")+`')"id="`+(randomnr+"2")+`"style="position:relative;left:80%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
     <td><a style="position: relative;width:200px;"class="list-group-item list-group-item-action py-2 ripple active text" >IF STATEMENT
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
@@ -337,9 +340,7 @@ jQuery(document).ready(function() {
   
   
            `
-           $( "#"+randomnr ).draggable();
-  
-       
+           $( "#"+randomnr ).draggable();     
           jsPlumb.importDefaults({
           ConnectionsDetachable: true,
           ReattachConnections: true,
@@ -347,16 +348,7 @@ jQuery(document).ready(function() {
           Container: "page_connections"
         });
 
-        jQuery("#"+randomnr+2).click(function() {
-          $("#"+randomnr+3).remove();
-        });
-
-
-
-
-
-
-        jQuery("#"+randomnr+1).click(function() {
+        jQuery("#"+randomnr+"1").click(function() {
           // remove existing endpoint if any
           //jsPlumb.deleteEndpoint(questionEndpoints[1]);
           //create a new one:
@@ -426,10 +418,12 @@ jQuery(document).ready(function() {
     console.log(randomnr)
     var tag = document.createElement(randomnr);
     tag.id = randomnr
+    tag.style.position = 'absolute';
     document.getElementById('aaaasdasdasd').appendChild(tag);
     tagplus1=(randomnr+1)
-    tag.innerHTML =`<div id="`+(randomnr+3)+`">
-    <div id="`+(randomnr+2)+`"style="position:relative;left:120%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
+    tagplus3=(randomnr+"3")
+    tag.innerHTML =`<div id="`+tagplus3+`">
+    <div onclick="deleteid('`+(randomnr+"3")+`')"id="`+(randomnr+"2")+`"style="position:relative;left:80%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
     <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >SET/UPDATE VARIABLE
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
@@ -518,11 +512,12 @@ jQuery(document).ready(function() {
     console.log(randomnr)
     var tag = document.createElement(randomnr);
     tag.id = randomnr
-    
+    tag.style.position = 'absolute';
     document.getElementById('aaaasdasdasd').appendChild(tag);
     tagplus1=(randomnr+1)
-    tag.innerHTML =`<div id="`+(randomnr+3)+`">
-    <div id="`+(randomnr+2)+`"style="position:relative;left:120%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
+    tagplus3=(randomnr+"3")
+    tag.innerHTML =`<div id="`+tagplus3+`">
+    <div onclick="deleteid('`+(randomnr+"3")+`')"id="`+(randomnr+"2")+`"style="position:relative;left:90%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
     <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >Print/Console.log
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
