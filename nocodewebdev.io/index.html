@@ -178,7 +178,7 @@ ul li {
         <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-        <script src="C:/Users/alexa/Desktop/nocodewebdev.io/node_modules/jsplumb/dist/js/jsplumb.min.js "></script>
+        <script src="./node_modules/jsplumb/dist/js/jsplumb.min.js "></script>
     
       </head>
 
@@ -285,6 +285,7 @@ tabelposiibleelenmets ={
 
     
 jQuery(document).ready(function() {
+  dateconnections = {}
 
 
 
@@ -313,14 +314,14 @@ jQuery(document).ready(function() {
     
     document.getElementById('aaaasdasdasd').appendChild(tag);
     tagplus1=(randomnr+1)
-    tag.innerHTML =`
-
+    tag.innerHTML =`<div id="`+(randomnr+3)+`">
+    <div id="`+(randomnr+2)+`"style="position:relative;left:120%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
     <td><a style="position: relative;width:200px;"class="list-group-item list-group-item-action py-2 ripple active text" >IF STATEMENT
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
+      
       <div class="list-group-item list-group-item-action py-2 ripple active text" style="relative;width:200px;">
         <label for="name"></label>
-
 <input style="width:40px;"type="text" id="name">
   <select name="operator" id="cars">
     <option value="=">==</option>
@@ -330,14 +331,11 @@ jQuery(document).ready(function() {
     <option value="&&=">&&</option>
   </select>
   <label for="name"></label>
-
 <input style="width:40px;"type="text" id="name">
   </div>
-
+  </div>
   
   
-
-
            `
            $( "#"+randomnr ).draggable();
   
@@ -349,8 +347,9 @@ jQuery(document).ready(function() {
           Container: "page_connections"
         });
 
-
-
+        jQuery("#"+randomnr+2).click(function() {
+          $("#"+randomnr+3).remove();
+        });
 
 
 
@@ -361,7 +360,20 @@ jQuery(document).ready(function() {
           // remove existing endpoint if any
           //jsPlumb.deleteEndpoint(questionEndpoints[1]);
           //create a new one:
-          console.log(this.id)
+          //console.log(this.id)
+          if (tablecontents[this.id]==null){
+              tablecontents[this.id] = {}
+              tablecontents[this.id][3] = []
+          }
+          if(currentid==this.id){
+            console.log("stergere")
+            for (let value of tablecontents[this.id][3]) {
+              
+                    console.log(value)
+                    jsPlumb.deleteEndpoint(value);
+            }
+           
+          }
           if(questionEndpoints[0] == undefined){
             questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
             currentid = this.id
@@ -371,11 +383,17 @@ jQuery(document).ready(function() {
               tablecontents[this.id][1] = true
               questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
               tablecontents[this.id][2] = questionEndpoints[1],this.id
+              tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               connectEndpoints();
+              currentid = this.id
               }else{
-                  jsPlumb.deleteEndpoint(tablecontents[this.id][2]);
-                  connections = 
-                  tablecontents[this.id] = undefined
+                
+                  for(k in tablecontents[this.id][3]){
+                    console.log("stergere")
+                    console.log(k)
+                    jsPlumb.deleteEndpoint(k);
+                  }
+                  //tablecontents[this.id] = undefined
               }
             }
         });
@@ -385,7 +403,13 @@ jQuery(document).ready(function() {
             source: questionEndpoints[0],
             target: questionEndpoints[1]
           });
-          console.log(questionEndpoints)
+          console.log(questionEndpoints+"asdasasdsad")
+          if (tablecontents[this.id]==null){
+              tablecontents[this.id] = {}
+              tablecontents[this.id][3] = []
+
+          }
+          
           setTimeout(questionEndpoints = [], 20);
           jsPlumb.repaintEverything();
         }
@@ -402,11 +426,10 @@ jQuery(document).ready(function() {
     console.log(randomnr)
     var tag = document.createElement(randomnr);
     tag.id = randomnr
-    
     document.getElementById('aaaasdasdasd').appendChild(tag);
     tagplus1=(randomnr+1)
-    tag.innerHTML =`
-
+    tag.innerHTML =`<div id="`+(randomnr+3)+`">
+    <div id="`+(randomnr+2)+`"style="position:relative;left:120%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
     <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >SET/UPDATE VARIABLE
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
@@ -421,16 +444,8 @@ jQuery(document).ready(function() {
 
 <input style="width:40px;"type="text" id="name">
 <label style="font-size:10px;" for="name">Value</label></br>
-  </div>
-
-  
-  
-
-
-           `
+  </div></div></div>`
            $( "#"+randomnr ).draggable();
-  
-       
           jsPlumb.importDefaults({
           ConnectionsDetachable: true,
           ReattachConnections: true,
@@ -438,18 +453,30 @@ jQuery(document).ready(function() {
           Container: "page_connections"
         });
 
-
-
-
-
-
-
-
+        jQuery("#"+randomnr+2).click(function() {
+          $("#"+randomnr+3).remove();
+        });
 
         jQuery("#"+randomnr+1).click(function() {
+          console.log(tablecontents)
           // remove existing endpoint if any
-          //jsPlumb.deleteEndpoint(questionEndpoints[1]);
+          // jsPlumb.deleteEndpoint(this.id);
           //create a new one:
+          if (tablecontents[this.id]==null){
+              tablecontents[this.id] = {}
+              tablecontents[this.id][3] = []
+          }
+          if(currentid==this.id){
+            console.log("stergere")
+            for (let value of tablecontents[this.id][3]) {
+              
+                    console.log(value)
+                    jsPlumb.deleteEndpoint(value);
+            }
+           
+          }
+        
+          
           console.log(this.id)
           if(questionEndpoints[0] == undefined){
             questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
@@ -460,9 +487,11 @@ jQuery(document).ready(function() {
               tablecontents[this.id][1] = true
               questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
               tablecontents[this.id][2] = questionEndpoints[1],this.id
+              tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               connectEndpoints();
+              currentid=this.id
               }else{
-                  jsPlumb.deleteEndpoint(tablecontents[this.id][2]);
+                  jsPlumb.deleteEndpoint(this.id);
                   tablecontents[this.id] = undefined
               }
             }
@@ -484,8 +513,6 @@ jQuery(document).ready(function() {
 
 
       $(document).on ("click", "#consolelog", function () {
-    
-     
     cat = cat + 1
     randomnr = MakeRandomString(70);
     console.log(randomnr)
@@ -494,23 +521,16 @@ jQuery(document).ready(function() {
     
     document.getElementById('aaaasdasdasd').appendChild(tag);
     tagplus1=(randomnr+1)
-    tag.innerHTML =`
-
+    tag.innerHTML =`<div id="`+(randomnr+3)+`">
+    <div id="`+(randomnr+2)+`"style="position:relative;left:120%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
     <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >Print/Console.log
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
       <div class="list-group-item list-group-item-action py-2 ripple active text" style="relative;width:200px;">
         <label for="name"></label>
         <label style="font-size:10px;" for="name">Enter variable name / string("smth")/ other</label></br>
-       
 <input style="width:100%;"type="text" id="name">
-
-  </div>
-
-  
-  
-
-
+  </div></div></div>
            `
            $( "#"+randomnr ).draggable();
   
@@ -523,7 +543,9 @@ jQuery(document).ready(function() {
         });
 
 
-
+        jQuery("#"+randomnr+2).click(function() {
+          $("#"+randomnr+3).remove();
+        });
 
 
 
@@ -531,9 +553,23 @@ jQuery(document).ready(function() {
 
 
         jQuery("#"+randomnr+1).click(function() {
+          console.log(tablecontents)
           // remove existing endpoint if any
-          //jsPlumb.deleteEndpoint(questionEndpoints[1]);
+          // jsPlumb.deleteEndpoint(this.id);
           //create a new one:
+          if (tablecontents[this.id]==null){
+              tablecontents[this.id] = {}
+              tablecontents[this.id][3] = []
+          }
+          if(currentid==this.id){
+            console.log("stergere")
+            for (let value of tablecontents[this.id][3]) {
+              
+                    console.log(value)
+                    jsPlumb.deleteEndpoint(value);
+            }
+           
+          }
           console.log(this.id)
           if(questionEndpoints[0] == undefined){
             questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
@@ -544,10 +580,12 @@ jQuery(document).ready(function() {
               tablecontents[this.id][1] = true
               questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
               tablecontents[this.id][2] = questionEndpoints[1],this.id
+              tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               connectEndpoints();
               }else{
-                  jsPlumb.deleteEndpoint(tablecontents[this.id][2]);
+                  jsPlumb.deleteEndpoint(this.id);
                   tablecontents[this.id] = undefined
+                  currentid=this.id
               }
             }
         });
@@ -615,17 +653,17 @@ jQuery(document).ready(function() {
         var tablecontents = []
         // "source" click handler
         function falseordeleteEndPoint(id){
-            console.log(tablecontents[id])
+            //console.log(tablecontents[id])
             if (typeof tablecontents[id] !== 'undefined'){
                 if(tablecontents[id][1] != false){
-                    return true
+                    return false
                     //delete end point
                 }else{
                     return false
                     //dont delete endpoint
                 }
             }else{
-                tablecontents[id] = {}
+            
                 //dont delete endpoint
                     return false
        
