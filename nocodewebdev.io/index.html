@@ -208,6 +208,7 @@ ul li {
     
       </ul>
     </div>
+    <button style="position:absolute;left:80%;" onclick="createmycod()")>Create Code</button>
   </div>
         <script src="https://kit.fontawesome.com/238934a23b.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -276,7 +277,7 @@ tabelposiibleelenmets ={
            aria-current="true"
            
            >
-           <i class="fa-solid fa-text-slash"></i><span>Print/Console.log</span>
+           <i class="fa-solid fa-text-slash"></i><span>Print///console.log</span>
         </button><br>
      
       `],
@@ -310,7 +311,7 @@ jQuery(document).ready(function() {
      
     cat = cat + 1
     randomnr = MakeRandomString(70);
-    console.log(randomnr)
+    //console.log(randomnr)
     var tag = document.createElement(randomnr);
     tag.id = randomnr
     tag.style.position = 'absolute';
@@ -318,7 +319,7 @@ jQuery(document).ready(function() {
     tagplus1=(randomnr+"1")
     tagplus3=(randomnr+"3")
     tag.innerHTML =`<div id="`+tagplus3+`">
-    <div onclick="deleteid('`+(randomnr+"3")+`')"id="`+(randomnr+"2")+`"style="position:relative;left:80%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
+    <div onclick="deleteid('`+(randomnr+"3")+`')"id="`+(randomnr+"2")+`"style="position:relative;left:90%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
     <td><a style="position: relative;width:200px;"class="list-group-item list-group-item-action py-2 ripple active text" >IF STATEMENT
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
@@ -352,19 +353,20 @@ jQuery(document).ready(function() {
           // remove existing endpoint if any
           //jsPlumb.deleteEndpoint(questionEndpoints[1]);
           //create a new one:
-          //console.log(this.id)
+          ////console.log(this.id)
           if (tablecontents[this.id]==null){
               tablecontents[this.id] = {}
               tablecontents[this.id][3] = []
           }
           if(currentid==this.id){
-            console.log("stergere")
+            //console.log("stergere")
             for (let value of tablecontents[this.id][3]) {
               
-                    console.log(value)
+                    //console.log(value)
+                   
                     jsPlumb.deleteEndpoint(value);
             }
-           
+            tablecontents[this.id][3] = []
           }
           if(questionEndpoints[0] == undefined){
             questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
@@ -374,18 +376,18 @@ jQuery(document).ready(function() {
             if (falseordeleteEndPoint(this.id)==false &&currentid!=this.id){
               tablecontents[this.id][1] = true
               questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
-              tablecontents[this.id][2] = questionEndpoints[1],this.id
+              tablecontents[this.id][2] = questionEndpoints[1],this.id,questionEndpoints[0]
               tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               connectEndpoints();
               currentid = this.id
               }else{
                 
                   for(k in tablecontents[this.id][3]){
-                    console.log("stergere")
-                    console.log(k)
+                    //console.log("stergere")
+                    //console.log(k)
                     jsPlumb.deleteEndpoint(k);
                   }
-                  //tablecontents[this.id] = undefined
+                  //
               }
             }
         });
@@ -395,27 +397,21 @@ jQuery(document).ready(function() {
             source: questionEndpoints[0],
             target: questionEndpoints[1]
           });
-          console.log(questionEndpoints+"asdasasdsad")
+          //console.log(questionEndpoints+"asdasasdsad")
           if (tablecontents[this.id]==null){
               tablecontents[this.id] = {}
               tablecontents[this.id][3] = []
 
-          }
-          
+          } 
+          //console.log(tablecontents)
           setTimeout(questionEndpoints = [], 20);
           jsPlumb.repaintEverything();
         }
-        
       });
-
-
-
       $(document).on ("click", "#variable", function () {
-    
-     
     cat = cat + 1
     randomnr = MakeRandomString(70);
-    console.log(randomnr)
+    //console.log(randomnr)
     var tag = document.createElement(randomnr);
     tag.id = randomnr
     tag.style.position = 'absolute';
@@ -423,7 +419,7 @@ jQuery(document).ready(function() {
     tagplus1=(randomnr+1)
     tagplus3=(randomnr+"3")
     tag.innerHTML =`<div id="`+tagplus3+`">
-    <div onclick="deleteid('`+(randomnr+"3")+`')"id="`+(randomnr+"2")+`"style="position:relative;left:80%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
+    <div onclick="deleteid('`+(randomnr+"3")+`')"id="`+(randomnr+"2")+`"style="position:relative;left:90%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
     <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >SET/UPDATE VARIABLE
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
@@ -452,7 +448,7 @@ jQuery(document).ready(function() {
         });
 
         jQuery("#"+randomnr+1).click(function() {
-          console.log(tablecontents)
+          //console.log(tablecontents)
           // remove existing endpoint if any
           // jsPlumb.deleteEndpoint(this.id);
           //create a new one:
@@ -461,17 +457,18 @@ jQuery(document).ready(function() {
               tablecontents[this.id][3] = []
           }
           if(currentid==this.id){
-            console.log("stergere")
+            //console.log("stergere")
             for (let value of tablecontents[this.id][3]) {
               
-                    console.log(value)
+                    //console.log(value)
+                    
                     jsPlumb.deleteEndpoint(value);
             }
-           
+            tablecontents[this.id][3] = []
           }
         
           
-          console.log(this.id)
+          //console.log(this.id)
           if(questionEndpoints[0] == undefined){
             questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
             currentid = this.id
@@ -480,13 +477,13 @@ jQuery(document).ready(function() {
             if (falseordeleteEndPoint(this.id)==false &&currentid!=this.id){
               tablecontents[this.id][1] = true
               questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
-              tablecontents[this.id][2] = questionEndpoints[1],this.id
+              tablecontents[this.id][2] = questionEndpoints[1],this.id,questionEndpoints[0]
               tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               connectEndpoints();
               currentid=this.id
               }else{
                   jsPlumb.deleteEndpoint(this.id);
-                  tablecontents[this.id] = undefined
+                  
               }
             }
         });
@@ -496,7 +493,7 @@ jQuery(document).ready(function() {
             source: questionEndpoints[0],
             target: questionEndpoints[1]
           });
-          console.log(questionEndpoints)
+          //console.log(questionEndpoints)
           setTimeout(questionEndpoints = [], 20);
           jsPlumb.repaintEverything();
         }
@@ -509,7 +506,7 @@ jQuery(document).ready(function() {
       $(document).on ("click", "#consolelog", function () {
     cat = cat + 1
     randomnr = MakeRandomString(70);
-    console.log(randomnr)
+    //console.log(randomnr)
     var tag = document.createElement(randomnr);
     tag.id = randomnr
     tag.style.position = 'absolute';
@@ -518,7 +515,7 @@ jQuery(document).ready(function() {
     tagplus3=(randomnr+"3")
     tag.innerHTML =`<div id="`+tagplus3+`">
     <div onclick="deleteid('`+(randomnr+"3")+`')"id="`+(randomnr+"2")+`"style="position:relative;left:90%;top:20px;z-index:100;"><img height="20" src="img/x-png.png"></img></div>
-    <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >Print/Console.log
+    <td><a style="position: relative;width:200px;font-size:15px;"class="list-group-item list-group-item-action py-2 ripple active text" >Print///console.log
       <span class="dot"id="`+tagplus1+`"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  <img width="30"style="left:50%" src="https://images.squarespace-cdn.com/content/v1/5cc9adbd815512424050bffb/1563554742361-0AB7HKIZIBOX1322RJMC/Connect-Logo-print_mark-only-color.png"></img></span>
       </a></td>
       <div class="list-group-item list-group-item-action py-2 ripple active text" style="relative;width:200px;">
@@ -548,7 +545,7 @@ jQuery(document).ready(function() {
 
 
         jQuery("#"+randomnr+1).click(function() {
-          console.log(tablecontents)
+          //console.log(tablecontents)
           // remove existing endpoint if any
           // jsPlumb.deleteEndpoint(this.id);
           //create a new one:
@@ -557,15 +554,17 @@ jQuery(document).ready(function() {
               tablecontents[this.id][3] = []
           }
           if(currentid==this.id){
-            console.log("stergere")
+            //console.log("stergere")
             for (let value of tablecontents[this.id][3]) {
               
-                    console.log(value)
+                    //console.log(value)
+                    
                     jsPlumb.deleteEndpoint(value);
             }
+            tablecontents[this.id][3] = []
            
           }
-          console.log(this.id)
+          //console.log(this.id)
           if(questionEndpoints[0] == undefined){
             questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
             currentid = this.id
@@ -574,12 +573,12 @@ jQuery(document).ready(function() {
             if (falseordeleteEndPoint(this.id)==false &&currentid!=this.id){
               tablecontents[this.id][1] = true
               questionEndpoints[1] = jsPlumb.addEndpoint(jQuery(this), LeftsourceOption);
-              tablecontents[this.id][2] = questionEndpoints[1],this.id
+              tablecontents[this.id][2] = questionEndpoints[1],this.id,questionEndpoints[0]
               tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               connectEndpoints();
               }else{
                   jsPlumb.deleteEndpoint(this.id);
-                  tablecontents[this.id] = undefined
+                  
                   currentid=this.id
               }
             }
@@ -590,7 +589,7 @@ jQuery(document).ready(function() {
             source: questionEndpoints[0],
             target: questionEndpoints[1]
           });
-          console.log(questionEndpoints)
+          //console.log(questionEndpoints)
           setTimeout(questionEndpoints = [], 20);
           jsPlumb.repaintEverything();
         }
@@ -646,9 +645,40 @@ jQuery(document).ready(function() {
       
         var questionEndpoints = []; // 'source' and 'target' endpoints
         var tablecontents = []
+        function createmycod(){
+          var fromto ={}
+          //console.log(tablecontents)
+          trfs = false
+          elements = {}
+          for (var val in tablecontents){
+            if (tablecontents[val][2]?.elementId) {
+              console.log(tablecontents[val][2]["elementId"])
+            }
+            from = ""
+            for (var val1 in tablecontents[val][3]){
+              elements[tablecontents[val][3][val1]["elementId"]] = []
+            }
+            for (var val1 in tablecontents[val][3]){
+              
+              if (trfs){
+                trfs = !trfs
+                //console.log("to")
+                //console.log(tablecontents[val][3][val1])
+                
+                elements[tablecontents[val][3][val1]["elementId"]].push(from["elementId"])
+              }else{
+                trfs = !trfs
+                //console.log("from")
+                from = tablecontents[val][3][val1]
+                //console.log(tablecontents[val][3][val1])
+              }
+            }
+            console.log(elements)
+          }
+        }
         // "source" click handler
         function falseordeleteEndPoint(id){
-            //console.log(tablecontents[id])
+            //////console.log(tablecontents[id])
             if (typeof tablecontents[id] !== 'undefined'){
                 if(tablecontents[id][1] != false){
                     return false
