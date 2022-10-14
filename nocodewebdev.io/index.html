@@ -340,9 +340,9 @@ jQuery(document).ready(function() {
   for(k in tablecontents[id][5]){
                     //console.log("stergere")
                     //console.log(k)
-    jsPlumb.deleteEndpoint(k);
+    //jsPlumb.deleteEndpoint(k);
   }
-  tablecontents[id][5] = []
+  //tablecontents[id][5] = []
 }
       connections = {}
 
@@ -427,6 +427,8 @@ jQuery(document).ready(function() {
               tablecontents[this.id][3] = []
               tablecontents[this.id][4] = "if"
               tablecontents[this.id][5] = []
+              tablecontents[this.id][7] = 0
+              tablecontents[this.id][8] = null
           }
           if(currentid==this.id){
             //console.log("stergere")
@@ -434,7 +436,7 @@ jQuery(document).ready(function() {
               
                     //console.log(value)
                    
-                    jsPlumb.deleteEndpoint(value);
+                    //jsPlumb.deleteEndpoint(value);
             }
             tablecontents[this.id][3] = []
           }
@@ -450,15 +452,18 @@ jQuery(document).ready(function() {
               tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               tablecontents[currentid][5].push([questionEndpoints[0],questionEndpoints[1]])
               tablecontents[this.id][5].push([questionEndpoints[0],questionEndpoints[1]])
+              tablecontents[this.id][6] = currentid
+              tablecontents[this.id][7] = tablecontents[this.id][7]+1+tablecontents[currentid][7]
+              tablecontents[currentid][6] = this.id
+              if (tablecontents[currentid][8] == null){
+                tablecontents[currentid][8] = currentid
+              }
+                tablecontents[this.id][8] = tablecontents[currentid][8]
+          
               connectEndpoints();
               currentid = this.id
               }else{
                 
-                  for(k in tablecontents[this.id][3]){
-                    //console.log("stergere")
-                    //console.log(k)
-                    jsPlumb.deleteEndpoint(k);
-                  }
                   //
               }
             }
@@ -546,6 +551,8 @@ jQuery(document).ready(function() {
               tablecontents[this.id][3] = []
               tablecontents[this.id][4] = "SetVar"
               tablecontents[this.id][5] = []
+              tablecontents[this.id][7] = 0
+              tablecontents[this.id][8] = null
           }
           if(currentid==this.id){
             //console.log("stergere")
@@ -561,7 +568,7 @@ jQuery(document).ready(function() {
           
           //console.log(this.id)
           if(questionEndpoints[0] == undefined){
-            questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
+            //questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
             currentid = this.id
             
           }else{
@@ -572,6 +579,13 @@ jQuery(document).ready(function() {
               tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               tablecontents[currentid][5].push([questionEndpoints[0],questionEndpoints[1]])
               tablecontents[this.id][5].push([questionEndpoints[0],questionEndpoints[1]])
+              tablecontents[this.id][6] = currentid
+              tablecontents[this.id][7] = tablecontents[this.id][7]+1+tablecontents[currentid][7]
+              tablecontents[currentid][6] = this.id
+              if (tablecontents[currentid][8] == null){
+                tablecontents[currentid][8] = currentid
+              }
+                tablecontents[this.id][8] = tablecontents[currentid][8]
               connectEndpoints();
               currentid=this.id
               }else{
@@ -921,92 +935,105 @@ function zoom_page(step, trigger)
         var questionEndpoints = []; // 'source' and 'target' endpoints
         var tablecontents = []
         function createmycod(){
-          var fromto ={}
+          origins = {}
           //console.log(tablecontents)
-          trfs = false
-          elements = {}
-          wcode = ""
-          //console.log(tablecontents)
-          for (var val in tablecontents){
-            console.log(val)
-            if (val[4]="SetVar"&&val[3].length==0){
-              wcode = wcode+"\n"+$("#"+val.slice(0, -1)+"varname").val()+"="+$("#"+val.slice(0, -1)+"var").val()
+          wcode={}
+          for(var k in tablecontents){
+            if(tablecontents[k][8]==k){
+              origins[k] = []
             }
-            if (tablecontents[val][2]?.elementId) {
-              //console.log(tablecontents[val][2]["elementId"])
-            }else{
-              //console.log(val)
-             //wcode = wcode+"\n"+$("#"+val.slice(0, -1)+"varname").val()+"="+$("#"+val.slice(0, -1)+"var").val()
-            }
-            from = ""
-            for (var val1 in tablecontents[val][3]){
-              elements[tablecontents[val][3][val1]["elementId"]] = []
-            }
-            for (var val1 in tablecontents[val][3]){
+          }
+          for(var k in tablecontents){
+            if(tablecontents[k][8]==k){
+              //origins[k] = []
+            }else if(k!="undefined"){
+              //console.log(tablecontents[k][8])
+              //console.log(origins)
+              tabletopush = {}
+              tabletopush[1] = tablecontents[k][8]
+              tabletopush[2] = tablecontents[k][7]
+              tabletopush[3] = k
+              tabletopush[4] = tablecontents[k][4]
               
-              if (trfs){
-                trfs = !trfs
-                //console.log("to")
-                //console.log(tablecontents[val][3][val1])
-                
-                elements[tablecontents[val][3][val1]["elementId"]].push(from["elementId"])
-              }else{
-                trfs = !trfs
-                //console.log("from")
-                from = tablecontents[val][3][val1]
-                //console.log(tablecontents[val][3][val1])
-              }
-            }
-            
-            //console.log(elements)
-            end = false
-          }
-          //console.log(elements)
-          hHmanyleft = 0
-          hvtoclose = false
-          tablefrom = {}
-          for (var k in elements){
-            tablefrom[k] = 0
-          }
-          for (var k in elements){
-           
-            for (k1 in elements[k]){
-              tablefrom[elements[k][k1]] = tablefrom[elements[k][k1]]+1
+              //console.log(origin[tablecontents[k][8]])
+              //console.log(k)
+              //console.log(tablecontents[k][8])
+              //console.log(origins[tablecontents[k][8]])
+              origins[tablecontents[k][8]].push(tabletopush)
             }
           }
-          //console.log(elements)
-          //console.log(tablefrom)
-          for (var k in elements){
-            
-              if (tablecontents[k][4] == "SetVar"){
-                //console.log("#"+k+"var")
-                //console.log(k)
-                wcode = wcode+"\n"+$("#"+k.slice(0, -1)+"varname").val()+"="+$("#"+k.slice(0, -1)+"var").val()
-              }else if (tablecontents[k][4] == "if"){
-                //console.log("#"+k+"var")
-                var1 = $("#"+k.slice(0, -1)+"var1").val()
-                var2 = $("#"+k.slice(0, -1)+"var2").val()
-                op = $("#"+k.slice(0, -1)+"operator").val()
-                wcode = wcode+"\nif("+var1+op+var2+"){"
-                hHmanyleft = tablefrom[k]
-                //console.log("close"+hHmanyleft)
-                hvtoclose = true
-              }else if (tablecontents[k][4] == "clog"){
-                //console.log("#"+k+"var")
-                var1 = $("#"+k.slice(0, -1)+"clog").val()
-                wcode = wcode+"\nconsole.log("+var1+")"
-              }
-                if (hHmanyleft==0 && hvtoclose==true){
-                  wcode = wcode+"}"
-                  hvtoclose=false
-                  console.log(hvtoclose)
+          console.log(origins)
+          origins[undefined] = []
+          //console.log(origins)
+          last_lvl = null
+          did = []
+          
+          for (var id  in origins){
+            fnsh = false
+            wcode[id] = ""
+            for (let i = origins[id].length-1; i >= 0; i--) {
+              console.log(origins[id])
+              console.log(i)
+              current_cod = origins[id][i]
+              
+              if (last_lvl==null){
+                if(origins[id][i-1]!== undefined){
+                  
+                  last_lvl = current_cod[2]
                 }
-                if (hHmanyleft>0){
-              hHmanyleft = hHmanyleft-1
+              }else if(last_lvl != current_cod[2]){
+                    last_lvl = current_cod[2]
+                    //wcode = wcode+"\n}"
+                  }
+                  last_lvl = current_cod[2]
+                  console.log(origins[id][i])
+                  if (origins[id][i][4] == "if"){
+                    console.log(origins[id][i])
+                  k = origins[id][i][3]
+                  var1 = $("#"+k.slice(0, -1)+"var1").val()
+                  var2 = $("#"+k.slice(0, -1)+"var2").val()
+                  op = $("#"+k.slice(0, -1)+"operator").val()
+                  wcode[id] = "\nif("+var1+op+var2+"){"+wcode[id]+"}"
+                  }
+                  console.log(origins[id][i])
+                  if (origins[id][i][4] == "SetVar"){
+                  k = origins[id][i][3]
+                  wcode[id] = wcode[id]+"\n"+$("#"+k.slice(0, -1)+"varname").val()+"="+$("#"+k.slice(0, -1)+"var").val()
+                  start = true
+                  }
+                
+              
+              
+              console.log(origins[id][i])
             }
-             
+            console.log(origins[id])
+
+              if (origins[id][0] !=undefined&&origins[id][0][4] == "if"){
+                
+                    k = origins[id][0][1]
+                    var1 = $("#"+k.slice(0, -1)+"var1").val()
+                    var2 = $("#"+k.slice(0, -1)+"var2").val()
+                    op = $("#"+k.slice(0, -1)+"operator").val()
+                    wcode[id] = "\nif("+var1+op+var2+"){"+wcode[id]+"}"
+                    fnsh = true
+              
+            }else if (origins[id][0]!=undefined){
+                
+                    k = origins[id][0][1]
+                    var1 = $("#"+k.slice(0, -1)+"var1").val()
+                    var2 = $("#"+k.slice(0, -1)+"var2").val()
+                    op = $("#"+k.slice(0, -1)+"operator").val()
+                    wcode[id] = "\nif("+var1+op+var2+"){"+wcode[id]+"}"
+                    fnsh = true
+              
             }
-            console.log(wcode.replace("Microsoft", "W3Schools"))
+          }
+            
+          toprint = ""
+          for(var k in wcode){
+            toprint=toprint+"\n"+wcode[k]
+          }
+          console.log(toprint)
         }
         // "source" click handler
         function falseordeleteEndPoint(id){
