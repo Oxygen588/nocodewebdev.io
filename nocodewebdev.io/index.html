@@ -776,34 +776,27 @@ jQuery(document).ready(function() {
           $("#"+randomnr+3).remove();
         });
 
-
-
-
-
-
         jQuery("#"+randomnr+1).click(function() {
-          ////console.log(tablecontents)
-          // remove existing endpoint if any
-          // jsPlumb.deleteEndpoint(this.id);
-          //create a new one:
+
+  
           if (tablecontents[this.id]==null){
               tablecontents[this.id] = {}
               tablecontents[this.id][3] = []
-              tablecontents[this.id][4] ="initlogs"
+              tablecontents[this.id][4] = "if"
               tablecontents[this.id][5] = []
+              tablecontents[this.id][7] = 0
+              tablecontents[this.id][8] = null
           }
           if(currentid==this.id){
             ////console.log("stergere")
             for (let value of tablecontents[this.id][3]) {
               
                     ////console.log(value)
-                    
-                    jsPlumb.deleteEndpoint(value);
+                   
+                    //jsPlumb.deleteEndpoint(value);
             }
             tablecontents[this.id][3] = []
-           
           }
-          ////console.log(this.id)
           if(questionEndpoints[0] == undefined){
             questionEndpoints[0] = jsPlumb.addEndpoint(jQuery(this), RightsourceOption);
             currentid = this.id
@@ -816,11 +809,19 @@ jQuery(document).ready(function() {
               tablecontents[this.id][3].push(questionEndpoints[0],questionEndpoints[1]);
               tablecontents[currentid][5].push([questionEndpoints[0],questionEndpoints[1]])
               tablecontents[this.id][5].push([questionEndpoints[0],questionEndpoints[1]])
+              tablecontents[this.id][6] = currentid
+              tablecontents[this.id][7] = tablecontents[this.id][7]+1+tablecontents[currentid][7]
+              tablecontents[currentid][6] = this.id
+              if (tablecontents[currentid][8] == null){
+                tablecontents[currentid][8] = currentid
+              }
+                tablecontents[this.id][8] = tablecontents[currentid][8]
+          
               connectEndpoints();
+              currentid = this.id
               }else{
-                  jsPlumb.deleteEndpoint(this.id);
-                  
-                  currentid=this.id
+                
+                  //
               }
             }
         });
@@ -984,7 +985,7 @@ function zoom_page(step, trigger)
           ////console.log(origins)
           last_lvl = null
           did = []
-          
+          console.log(origins)
           for (var id  in origins){
             fnsh = false
             wcode[id] = ""
@@ -1015,6 +1016,7 @@ function zoom_page(step, trigger)
                       wcode[id] = "\nif("+var1+op+var2+"){"+wcode[id]+"}"
                       }
                       }
+         
                       //console.log(origins[id][i][i1])
                       if (origins[id][i][i1][4] == "SetVar"){
                       k = origins[id][i][i1][3]
