@@ -416,6 +416,7 @@ jQuery(document).ready(function() {
           }
          tablecontents[this.id.slice(0, -4)+"1"][5] = []
           tablecontents[this.id] = null
+          tablecontents[this.id+"1"] = null
         });
         jQuery("#"+randomnr+"1").click(function() {
           // remove existing endpoint if any
@@ -939,33 +940,42 @@ function zoom_page(step, trigger)
           ////console.log(tablecontents)
           wcode={}
           for(var k in tablecontents){
-            if(tablecontents[k][8]==k){
+            
+            if(tablecontents[k]==null){
+              console.log(tablecontents[k])
+              const index = tablecontents.indexOf(k);
+              if (index > -1) { // only splice array when item is found
+                tablecontents.splice(index, 1); // 2nd parameter means remove one item only
+              }
+            }else if(tablecontents[k][8]==k){
               origins[k] = []
             }
           }
           for(var k in tablecontents){
-            if(tablecontents[k][8]==k){
-              //origins[k] = []
-            }else if(k!="undefined"){
-              ////console.log(tablecontents[k][8])
-              ////console.log(origins)
-              tabletopush = {}
-              tabletopush[1] = tablecontents[k][8]
-              tabletopush[2] = tablecontents[k][7]
-              tabletopush[3] = k
-              tabletopush[4] = tablecontents[k][4]
-              
-              ////console.log(origin[tablecontents[k][8]])
-              ////console.log(k)
-              ////console.log(tablecontents[k][8])
-              ////console.log(origins[tablecontents[k][8]])
-              if (origins[tablecontents[k][8]][tabletopush[2]] == undefined){
-                origins[tablecontents[k][8]][tabletopush[2]] = []
-              }
-              if (tabletopush[4] =="if"){
-              origins[tablecontents[k][8]][tabletopush[2]].unshift(tabletopush)
-              }else{
-                origins[tablecontents[k][8]][tabletopush[2]].push(tabletopush)
+            if(tablecontents[k]!=null){
+              if(tablecontents[k][8]==k){
+                //origins[k] = []
+              }else if(k!="undefined"){
+                ////console.log(tablecontents[k][8])
+                ////console.log(origins)
+                tabletopush = {}
+                tabletopush[1] = tablecontents[k][8]
+                tabletopush[2] = tablecontents[k][7]
+                tabletopush[3] = k
+                tabletopush[4] = tablecontents[k][4]
+                
+                ////console.log(origin[tablecontents[k][8]])
+                ////console.log(k)
+                ////console.log(tablecontents[k][8])
+                ////console.log(origins[tablecontents[k][8]])
+                if (origins[tablecontents[k][8]][tabletopush[2]] == undefined){
+                  origins[tablecontents[k][8]][tabletopush[2]] = []
+                }
+                if (tabletopush[4] =="if"){
+                origins[tablecontents[k][8]][tabletopush[2]].unshift(tabletopush)
+                }else{
+                  origins[tablecontents[k][8]][tabletopush[2]].push(tabletopush)
+                }
               }
             }
           }
@@ -1001,12 +1011,16 @@ function zoom_page(step, trigger)
                       var1 = $("#"+k.slice(0, -1)+"var1").val()
                       var2 = $("#"+k.slice(0, -1)+"var2").val()
                       op = $("#"+k.slice(0, -1)+"operator").val()
+                      if (var1!=undefined){
                       wcode[id] = "\nif("+var1+op+var2+"){"+wcode[id]+"}"
+                      }
                       }
                       //console.log(origins[id][i][i1])
                       if (origins[id][i][i1][4] == "SetVar"){
                       k = origins[id][i][i1][3]
+                      if ($("#"+k.slice(0, -1)+"varname").val()!=undefined){
                       wcode[id] = "\n"+$("#"+k.slice(0, -1)+"varname").val()+"="+$("#"+k.slice(0, -1)+"var").val()+wcode[id]
+                      }
                       start = true
                       }
                     
